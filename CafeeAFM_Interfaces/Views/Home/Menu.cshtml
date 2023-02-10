@@ -1,0 +1,198 @@
+﻿@using CafeeAFM.Models;
+@using System.Collections;
+@model ArrayList
+@{
+    ViewBag.Title = "Menu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Page Header Start -->
+<div class="container-fluid page-header mb-5 position-relative overlay-bottom">
+    <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
+        <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Menu</h1>
+        <div class="d-inline-flex mb-lg-5">
+            <p class="m-0 text-white"><a class="text-white" href="">Home</a></p>
+            <p class="m-0 text-white px-2">/</p>
+            <p class="m-0 text-white">Menu</p>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+<!-- Menu Start -->
+<div class="container-fluid pt-5">
+    <div class="container">
+        <div class="section-title">
+            <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Menu & Pricing</h4>
+            <h1 class="display-4">Coffee & Sweets</h1>
+        </div>
+        <!-- --------------------------------------------editting----------------------------------- -->
+      
+        <div class="divbtnnew">
+            <div style="font-size:30px;margin:20px ;text-align: center;">
+                <a id="btn2" style="cursor:pointer">Coffee </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="cursor:pointer;margin-right:60px" id="btn">Sweets</a>
+            </div>  <br><br><br>
+          
+        <div id="op">
+            @{Html.RenderPartial("_CoffeeListViewPartial", Model[0]);}
+        </div>
+        <div id="box" style="display:none">
+
+            @{Html.RenderPartial("_SweetListViewPartial", Model[1]);}
+        </div>
+            
+            </div>
+
+            <br />
+            <br />
+            <!-- --------------------------------------------editting----------------------------------- -->
+
+
+        </div>
+</div>
+
+<!-- JavaScript Libraries -->
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+
+    //window.addEventListener('load', function () {
+    //    GetAllStations();
+    //    function GetAllStations() {
+      
+    //        //================================== Coffee =========================================
+
+    //        var list = [];
+    //        $.ajax({
+    //            async: true,
+    //            method: 'GET',
+    //            dataType: 'JSON',
+    //            contentType: 'application/json; charset=utf-8',
+    //            url: 'https://localhost:44346/api/GetCoffee',
+    //            success: function (data) {
+    //                $.each(data, function (index, value1) {
+    //                    //$("#firstCoffeeRow").append('<div class= "col-lg-6"  id=' + index + '>\
+    //                    //   <h1 class="mb-5">'+ value1['CoffeeName'] + '</h1></div>');
+    //                    console.log("CoffeeName",value1['CoffeeName']);
+    //                    list.push(value1['CoffeeName']);
+    //                });
+    //            },
+
+    //            error: function () {
+    //                console.log("There is a proplem not get the Lecture!!!")
+    //            }
+    //        });
+    //        $.ajax({
+    //            async: true,
+    //            method: 'GET',
+    //            dataType: 'JSON',
+    //            contentType: 'application/json; charset=utf-8',
+    //            url: 'https://localhost:44346/api/GetAdditCoffee',
+    //            success: function (data) {
+    //                $.each(data, function (index, value) {
+    //                    $.each(list, function (index, value1) {
+    //                        console.log("CoffeeName compare",value1, value['Coffee']['CoffeeName']);
+    //                        console.log("additiontype and description",value['Addition']['AddType'], value['Addition']['Description']);
+
+    //                    //    if (value['Coffee']['CoffeeName'] == value1) {
+    //                    //        $('#'+ index +'').append('<div class="row align-items-center mb-5">\
+    //                    //        <div class="col-4 col-sm-3">\
+    //                    //            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="~/img/menu-1.jpg" alt="">\
+    //                    //            <h5 class="menu-price">$5</h5>\
+    //                    //        </div>\
+    //                    //        <div class="col-6 col-sm-6">\
+    //                    //            <h4>'+ value['Addition']['AddType'] + '</h4>\
+    //                    //            <p class="m-0">'+ value['Addition']['Description'] + '</p>\
+    //                    //        </div>\
+    //                    //        <div class="col-2 col-sm-3"><button>Request</button></div>\
+    //                    //    </div>\
+    //                    //</div>\ ');
+
+    //                    //    }
+
+
+    //                        //console.log(key, value2);
+    //                    });
+    //                });
+    //            },
+    //            error: function () {
+    //                console.log("There is a proplem not get the Lecture!!!")
+    //            }
+    //        });
+
+    //    //================================== Sweets =========================================
+    //        var list2 = [];
+    //        $.ajax({
+    //            async: true,
+    //            method: 'GET',
+    //            dataType: 'JSON',
+    //            contentType: 'application/json; charset=utf-8',
+    //            url: 'https://localhost:44346/api/GetSweets',
+    //            success: function (data) {
+    //                $.each(data, function (index, value1) {
+    //                    //$("#firstSweeetRow").append('<div class= "col-lg-6"  id=' + index + '>\
+    //                    //   <h1 class="mb-5">'+ value1['SweetName'] + '</h1></div>');
+    //                    console.log("SweetName", value1['SweetName']);
+    //                    list2.push(value1['SweetName']);
+    //                });
+    //            },
+
+    //            error: function () {
+    //                console.log("There is a proplem not get the Lecture!!!")
+    //            }
+    //        });
+    //        $.ajax({
+    //            async: true,
+    //            method: 'GET',
+    //            dataType: 'JSON',
+    //            contentType: 'application/json; charset=utf-8',
+    //            url: 'https://localhost:44346/api/GetAdditSweets',
+    //            success: function (data) {
+    //                $.each(data, function (index, value) {
+    //                    $.each(list2, function (index, value1) {
+    //                        console.log("sweetName compare", value1, value['Sweet']['SweetName']);
+    //                        console.log("additiontype and description", value['Addition']['AddType'], value['Addition']['Description']);
+
+    //                        //    if (value['Sweet']['SweetName'] == value1) {
+    //                        //        $('#'+ index +'').append('<div class="row align-items-center mb-5">\
+    //                        //        <div class="col-4 col-sm-3">\
+    //                        //            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="~/img/menu-1.jpg" alt="">\
+    //                        //            <h5 class="menu-price">$5</h5>\
+    //                        //        </div>\
+    //                        //        <div class="col-6 col-sm-6">\
+    //                        //            <h4>'+ value['Addition']['AddType'] + '</h4>\
+    //                        //            <p class="m-0">'+ value['Addition']['Description'] + '</p>\
+    //                        //        </div>\
+    //                        //        <div class="col-2 col-sm-3"><button>Request</button></div>\
+    //                        //    </div>\
+    //                        //</div>\ ');
+
+    //                        //    }
+
+
+    //                        //console.log(key, value2);
+    //                    });
+    //                });
+    //            },
+    //            error: function () {
+    //                console.log("There is a proplem not get the Lecture!!!")
+    //            }
+    //        });
+    //}
+    // });
+    const btn = document.getElementById('btn');
+    btn.addEventListener('click', () => {
+        const op = document.getElementById('op');
+        op.style.display = 'none';
+        const box = document.getElementById('box');
+        box.style.display = 'block';
+
+
+    });
+    const btn2 = document.getElementById('btn2');
+    btn2.addEventListener('click', () => {
+        const op = document.getElementById('op');
+        op.style.display = 'block';
+        const box = document.getElementById('box');
+        box.style.display = 'none';
+    });
+</script>
+<!-- Menu End -->

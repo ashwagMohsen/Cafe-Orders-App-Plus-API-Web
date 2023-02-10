@@ -1,0 +1,245 @@
+﻿@*@model CafeeAFM.Models.Service*@
+@using CafeeAFM.Models;
+@model List<Service>
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Page Header Start -->
+<div class="container-fluid page-header mb-5 position-relative overlay-bottom">
+    <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
+        <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Services</h1>
+        <div class="d-inline-flex mb-lg-5">
+            <p class="m-0 text-white"><a class="text-white" href="">Home</a></p>
+            <p class="m-0 text-white px-2">/</p>
+            <p class="m-0 text-white">Services</p>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+<!-- Service Start -->
+<div class="container-fluid pt-5">
+    <div class="container">
+        <div class="section-title">
+            <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Our Services</h4>
+            <h1 class="display-4">Books & Wi-Fi</h1>
+        </div>
+        <!-- --------------------------------------------editting----------------------------------- -->
+
+        <div class="divbtnnew">
+            <div style="font-size:30px;margin:20px ;text-align: center;">
+                <a id="btn2" style="cursor:pointer">Books </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="cursor:pointer;margin-right:60px" id="btn">Wi-Fi </a>
+            </div>  <br><br><br>
+            @using (Html.BeginForm("ServicesBooks", "Home", FormMethod.Post))
+            {
+                <div id="op">
+                    @*<h1 class="mb-5">Islamic Books</h1>*@
+                    <div class="row" id="firstCoffeeRow">
+                        @foreach (var i in Model)
+                        {
+                        <div class="col-lg-6 mb-5">
+                            <div class="row align-items-center">
+                                <div class="col-sm-5">
+                                    <img class="img-fluid mb-3 mb-sm-0" src="~/img/book.jpg" alt="">
+                                </div>
+                                <div class="col-sm-7">
+                                    @*<h4><i class="fa fa-truck service-icon"></i> Noor</h4>*@
+                                    @*@Html.LabelFor(i=>i.Book_Infos.Bookname, new { @class = "input" })*@
+
+                                    @*@Html.Label("Bookname",value: i.Book_Infos.Bookname)*@
+                                    <h1 class="mb-5">@i.Book_Infos.BookType.BookTypeName</h1>
+                                    @Html.TextBox("Bookname", value: i.Book_Infos.Bookname, htmlAttributes: new { @readonly = "readonly" })
+                                    <p class="m-0">
+                                        Sit lorem ipsum et diam elitr est dolor sed duo. Guberg sea et et lorem dolor sed est sit
+                                        invidunt, dolore tempor diam ipsum takima erat tempor
+                                    </p>
+                                    <br>    <div><button>Request</button></div>
+                                </div>
+
+                            </div>
+                        </div>}
+                    </div>
+                </div>
+            }
+            <!--======================================================================-->
+            @using (Html.BeginForm("ServicesWi_Fi", "Home", FormMethod.Post))
+            {
+                <div id="box" style="display:none">
+                    <div class="row" id="firstCoffeeRow">
+                        @foreach (var i in Model)
+                        {
+                            <div class="col-lg-6 mb-5">
+                                <div class="row align-items-center">
+                                    <div class="col-sm-7" style="background-color:burlywood ; padding:20px">
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <h5 style="color:black"><i class="fa fa-check text-primary mr-3"></i>Period: </h5>
+                                            </div>
+                                            <div class="col-sm-3">
+                                               @*<i class="fa fa-truck service-icon"></i>*@@Html.TextBox("Wifi_Period", value: i.Wifi_Infos.Wifi_Period@*, new { @readonly = "readonly" }*@)@*For one day*@
+                                            </div>
+                                        </div>
+                                      <br />
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <h5 style="color:black"><i class="fa fa-check text-primary mr-3"></i>Price: </h5>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                @Html.TextBox("Wifi_Price", value: i.Wifi_Infos.Wifi_Price@*, new { @readonly = "readonly" }*@)@*1000$*@
+                                            </div>
+                                        </div>
+                                        <div @*class="col-sm-3"*@>
+                                            <button>Request</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>}
+                        </div>
+                </div>
+            }
+        </div>
+
+        <br />
+        <br />
+
+
+
+        <!-- --------------------------------------------editting------------------------------------->
+
+    </div>
+</div>
+<!-- Service End -->
+<!-- JavaScript Libraries -->
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+
+        //window.addEventListener('load', function () {
+        //    console.log('hioooooooooooooo');
+        //    GetAllStations();
+        //    function GetAllStations() {
+        //        //================================== Books =========================================
+
+        //        var list = [];
+        //        $.ajax({
+        //            async: true,
+        //            method: 'GET',
+        //            dataType: 'JSON',
+        //            contentType: 'application/json; charset=utf-8',
+        //            url: 'https://localhost:44346/api/GetService',
+        //            //url: 'https://localhost:44346/api/PostLogin/',
+        //            //data: { Adminname: 'fatma', Password:'123'},
+        //            success: function (data) {
+
+
+        //                // console.log(data);
+        //                /*   $.each(data, function (index, value) {*/
+        //                $.each(data, function (index, value1) {
+        //                    $("#op").append('<h1 class="mb-5" >' + value1['BookTypeName'] + '</h1> <div class="row" id=' + index + '></div>');
+        //                    console.log(value1['BookTypeName']);
+        //                    list.push(value1['BookTypeName']);
+        //                });
+
+        //                //});
+
+        //            },
+
+        //            error: function () {
+        //                console.log("There is a proplem not get the Lecture!!!")
+        //            }
+        //        });
+        //        $.ajax({
+        //            async: true,
+        //            method: 'GET',
+        //            dataType: 'JSON',
+        //            contentType: 'application/json; charset=utf-8',
+        //            url: 'https://localhost:44346/api/GetBooks',
+        //            success: function (data) {
+        //                $.each(data, function (index, value) {
+        //                    console.log(value['BookType']['BookTypeName']);
+        //                    $.each(list, function (index, value1) {
+
+        //                        if (value['BookType']['BookTypeName'] == value1) {
+        //                            // console.log(value['Bookname']);
+        //                            $('#' + index + '').append('<div class="col-lg-6 mb-5">\
+        //                                    <div class= "row align-items-center" >\
+        //                                    <div class="col-sm-5">\
+        //                                        <img class="img-fluid mb-3 mb-sm-0" src="~/img/service-1.jpg" alt="">\
+        //                                </div>\
+        //                                        <div class="col-sm-7">\
+        //                                            <h4><i class="fa fa-truck service-icon"></i>' + value['Bookname'] + '</h4>\
+        //                                            <p class="m-0">\
+        //                                                Sit lorem ipsum et diam elitr est dolor sed duo. Guberg sea et et lorem dolor sed est sit\
+        //                                                invidunt, dolore tempor diam ipsum takima erat tempor\
+        //                                    </p>\
+        //                                            <br>    <div><button>Request</button></div>\
+        //                                </div>\
+        //                                        </div>\
+        //                                    </div></div>');
+
+        //                        }
+
+
+        //                        //console.log(key, value2);
+        //                    });
+        //                });
+        //            },
+        //            error: function () {
+        //                console.log("There is a proplem not get the Lecture!!!")
+        //            }
+        //        });
+        //        //================================== Wi_Fi =========================================
+        //        $.ajax({
+        //            async: true,
+        //            method: 'GET',
+        //            dataType: 'JSON',
+        //            contentType: 'application/json; charset=utf-8',
+        //            url: 'https://localhost:44346/api/GetWiFi',
+        //            success: function (data) {
+        //                $.each(data, function (index, value) {
+        //                    console.log(value['Wifi_Period'], value['Wifi_Price']);
+        //                    $("#firstCoffeeRow").append('<div class="col-lg-6 mb-5">\
+        //                        <div class= "row align-items-center" >\
+        //                        <div class="col-sm-7">\
+        //                            <h4><i class="fa fa-truck service-icon"></i>'+ value['Wifi_Period'] + '</h4>\
+        //                            <div class="row">\
+        //                                <div class="col-sm-5">\
+        //                                    <h5 style="color:black"><i class="fa fa-check text-primary mr-3"></i>Price: </h5>\
+        //                                </div>\
+        //                                <div class="col-sm-5">\
+        //                                    <h5 style="color:black;font-style: bold;">'+ value['Wifi_Price'] + '$</h5>\
+        //                                </div>\
+        //                                <div class="col-sm-2">\
+        //                                    <button>Request</button>\
+        //                                </div>\
+        //                            </div>\
+        //                        </div>\
+        //                    </div >\
+        //                </div >');
+
+
+        //                });
+        //            },
+        //            error: function () {
+        //                console.log("There is a proplem not get the Lecture!!!")
+        //            }
+        //        });
+
+        //    }
+        //});
+    const btn = document.getElementById('btn');
+    btn.addEventListener('click', () => {
+        const op = document.getElementById('op');
+        op.style.display = 'none';
+        const box = document.getElementById('box');
+        box.style.display = 'block';
+
+
+    });
+    const btn2 = document.getElementById('btn2');
+    btn2.addEventListener('click', () => {
+        const op = document.getElementById('op');
+        op.style.display = 'block';
+        const box = document.getElementById('box');
+        box.style.display = 'none';
+    });
+</script>

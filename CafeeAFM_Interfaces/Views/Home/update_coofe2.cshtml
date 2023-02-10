@@ -1,0 +1,60 @@
+﻿@model CafeeAFM.Models.Coffee
+
+@{
+    ViewBag.Title = "update_coofe2";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>update_coofe2</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+  
+    <div class="form-horizontal">
+        <h4>Coffee</h4>
+        <hr />
+        @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+        @Html.HiddenFor(model => model.Coffee_ID)
+        <div class="form-group">
+            @Html.Label("select coffee name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.DropDownList("Coffee_ID", null, htmlAttributes: new { @class = "input", onChange = "getServPrice()", @id = "Serv_Id1" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.CoffeeName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CoffeeName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CoffeeName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CoffeePrice, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CoffeePrice, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CoffeePrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CoffeeSize, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CoffeeSize, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CoffeeSize, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

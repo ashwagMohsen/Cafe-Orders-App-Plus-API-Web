@@ -1,0 +1,69 @@
+﻿@model CafeeAFM.Models.Admin
+
+@{
+    ViewBag.Title = "AdminLogin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+@*<label>@Model.AdminName</label>
+<label>@Model.Password</label>*@
+@using (Html.BeginForm("AdminLogin", "Home", FormMethod.Post))
+{
+    <table style="margin-left:50px">
+        <tr>
+            <td>
+                <label>Name</label>
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.AdminName, new { @class = "input" })
+                @Html.ValidationMessageFor(model => model.AdminName, "", new { @class = "text-danger" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Password</label>
+            </td>
+            <td>
+
+                @Html.PasswordFor(model => model.Password, new { @class = "input" })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </td>
+        </tr>
+        <tr>
+            <td> <input value="Login" type="submit" @*onclick="GetAllStations()"*@ /></td>
+        </tr>
+    </table>
+   
+   
+    <br />
+  
+
+   
+}
+@*<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        function GetAllStations() {
+            $.ajax({
+                async: true,
+                method: 'GET',
+                dataType: 'JSON',
+                contentType: 'application/json; charset=utf-8',
+                data: { Name: $("#Name").val(), Password: $("#Password").val()/* document.getElementById("getCoursename").textContent*/ },
+                url: 'https://localhost:44346/api/GetLogin',
+                success: function (data) {
+                },
+                error: function () {
+                    console.log("There is a Error!!!")
+                }
+            });
+
+
+        };
+    </script>*@

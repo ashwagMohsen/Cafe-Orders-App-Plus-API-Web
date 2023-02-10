@@ -1,0 +1,113 @@
+﻿
+@{
+    ViewBag.Title = "update_coofe";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Page Header Start -->
+<div class="container-fluid page-header mb-5 position-relative overlay-bottom">
+    <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
+        <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Admin</h1>
+        <div class="d-inline-flex mb-lg-5">
+            <p class="m-0 text-white"><a class="text-white" href="">Home</a></p>
+            <p class="m-0 text-white px-2">/</p>
+            <p class="m-0 text-white">Admin</p>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+<!-- Menu Start -->
+<div class="container-fluid pt-5">
+    <div class="container">
+        <h1>Updating  Coffe information  :</h1>
+        <br>
+      
+
+        <form>
+            <label>
+                Select Coffee Name :
+            </label>
+            <select id="firstCoffeeRow">
+
+            </select>
+            <label>Coffee Name: </label> <br>
+            <input type="text" id="CoffeeName"> <br> <br>
+            <label>Coffee Price: </label> <br>
+            <input type="text"> <br> <br>
+            @*<label>Coffee Size: </label> <br>
+        <input type="text"> <br>*@ <br>
+            <input type="button" value="Update " onclick="GetAllStations()">
+        </form>
+    </div>
+</div>
+<!-- Menu End -->
+<!-- JavaScript Libraries -->
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+    window.addEventListener('load', function () {
+        GetAllStationsload();
+        function GetAllStationsload() {
+            // var list = [];
+            $.ajax({
+                async: true,
+                method: 'GET',
+                dataType: 'JSON',
+                contentType: 'application/json; charset=utf-8',
+                url: 'https://localhost:44346/api/GetCoffee',
+                success: function (data) {
+                    $.each(data, function (index, value1) {
+
+                        $("#firstCoffeeRow").append('<option value="Course">' + value1['CoffeeName'] + '</option>');
+                        console.log("CoffeeName", value1['CoffeeName']);
+                        //list.push(value1['Coffee_ID']);
+                    });
+                },
+
+                error: function () {
+                    console.log("There is a proplem not get the Lecture!!!")
+                }
+            });
+        };
+    });
+
+    function GetAllStations() {
+     
+            var orderdata = {
+                'CoffeeName': $("#CoffeeName").val(), 'CoffeeSize': "small", 'CoffeePrice': 50
+            };
+        $.ajax({
+            async: true,
+            method: 'PUT',
+            dataType: 'JSON',
+            contentType: 'application/json; charset=utf-8',
+            data: {'selectedname': $("#firstCoffeeRow").val(), orderdata },
+                url: 'https://localhost:44346/api/PutCoffee',
+                success: function (data) {
+                    alert(data + "The order is done successfuly***");
+                },
+                error: function (data) {
+                    console.log("There is a Error!!!")
+                    alert(data);
+                }
+            });
+
+    };
+    const btn = document.getElementById('btn');
+    btn.addEventListener('click', () => {
+        const op = document.getElementById('op');
+        op.style.display = 'none';
+        const box = document.getElementById('box');
+        box.style.display = 'block';
+
+
+    });
+    const btn2 = document.getElementById('btn2');
+    btn2.addEventListener('click', () => {
+        const op = document.getElementById('op');
+        op.style.display = 'block';
+        const box = document.getElementById('box');
+        box.style.display = 'none';
+    });
+</script>
+
+

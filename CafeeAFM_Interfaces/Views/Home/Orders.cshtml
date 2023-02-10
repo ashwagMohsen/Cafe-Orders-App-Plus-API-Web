@@ -1,0 +1,173 @@
+﻿@using CafeeAFM.Models;
+@using System.Collections;
+@*@model Dictionary<string, ArrayList>*@
+@model ArrayList
+@{
+    ViewBag.Title = "Orders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Page Header Start -->
+<div class="container-fluid page-header mb-5 position-relative overlay-bottom">
+    <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
+        <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Orders</h1>
+        <div class="d-inline-flex mb-lg-5">
+            <p class="m-0 text-white"><a class="text-white" href="">Home</a></p>
+            <p class="m-0 text-white px-2">/</p>
+            <p class="m-0 text-white">Orders</p>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+<!-- Reservation Start -->
+
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="reservation position-relative overlay-top overlay-bottom">
+                @using (Html.BeginForm("Orders", "Home", FormMethod.Post))
+                {
+
+                    <div class="row align-items-center">
+
+                        <div class="col-lg-6 my-5 my-lg-0">
+                            <div class="p-5">
+                                <div class="mb-4">
+                                    <h1 class="display-4 text-primary">Menu</h1>
+                                    <h2 class="text-white">
+                                        Coffee
+                                    </h2>
+                                    @*@for (int i =0;i< Model.Count; i++)
+        {
+            @{Html.RenderPartial("_OrderCoffee", Model[i]);}
+        }*@
+
+                                    @*@if (Model.ContainsKey("coffees"))
+        {
+            { Html.RenderPartial("_OrderCoffee", Model["coffees"]); }
+        }*@
+
+
+                                    <h2 class="text-white">
+                                        Sweets
+                                    </h2>
+                                    @*@if (Model[1] == null)*@
+                                    @*@{Html.RenderPartial("_OrderSweet", Model[1]);}*@
+                                    @*@if (Model.ContainsKey("sweets"))
+        {
+            { Html.RenderPartial("_OrderSweet", Model["sweets"]); }
+        }*@
+
+                                    @*}*@
+
+
+                                    <h1 class="display-4 text-primary">Services</h1>
+                                    <h2 class="text-white">
+                                        Books
+                                    </h2>
+                                    @*@{
+            List<Book_Infos> n = new List<Book_Infos>();
+        }
+         @if (Model[2] == n)
+         {*@
+                                    @*@if (Model.ContainsKey("books"))
+        {
+
+            {
+                Html.RenderPartial("_OrderBook", Model["books"]);
+            }
+        }*@
+                                    @{Html.RenderPartial("_OrderBook", Model[2]);
+                                    }
+
+
+                                    @*}*@
+
+
+
+                                    <h2 class="text-white">
+                                        Wi-Fi
+                                    </h2>
+                                    @*@if (Model[3] == null)
+        {*@
+                                    @*@if (Model.ContainsKey("wifi"))
+        {
+            { Html.RenderPartial("_OrderWiFi", Model["wifi"]); }
+
+        }*@
+                                    @{ Html.RenderPartial("_OrderWiFi", Model[3]); }
+                                    @*}*@
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="text-center p-5" style="background: rgba(51, 33, 29, .8);">
+                                <h1 class="text-white mb-4 mt-5">Book Your Table</h1>
+                                <form class="mb-5">
+                                    <div class="form-group">
+                                        @*<input type="number" class="form-control bg-transparent border-primary p-4" placeholder="Table Number" id="TableNumber"
+        required="required" />*@
+                                        @*@Html.TextBoxFor(model => model.TableNumber, new { @class = "form-control bg-transparent border-primary p-4" })
+        @Html.ValidationMessageFor(model => model.TableNumber, "", new { @class = "text-danger" })*@
+                                        <label>Enter tabel number</label>
+                                        @Html.TextBox("TableNumber")
+                                        @Html.ValidationMessage("TableNumber", "", new { @class = "text-danger", })
+                                    </div>
+                                    <!--  <div class="form-group">
+                            <input type="number" class="form-control bg-transparent border-primary p-4" placeholder="Quantity"
+                                required="required" />
+                        </div>-->
+                                    <div class="form-group">
+                                        <div class="date" id="date" data-target-input="nearest">
+                                            <input type="text" class="form-control bg-transparent border-primary p-4 datetimepicker-input" placeholder="Date" data-target="#date" data-toggle="datetimepicker" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="time" id="time" data-target-input="nearest">
+                                            <input type="text" class="form-control bg-transparent border-primary p-4 datetimepicker-input" placeholder="Time" data-target="#time" data-toggle="datetimepicker" />
+                                        </div>
+                                    </div><br>
+                                    <div class="row"><h5 style="color:white"><i class="fa fa-check text-primary mr-3"></i>Total Price : </h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h5 style="color:white;font-style: bold;" id="TotalPrice">1000$</h5>@*@Html.LabelFor(model => model.Total_Price, new { @class = "form-control bg-transparent border-primary p-4", id="TotalPrice" } )*@</div>
+                                    <br>
+
+                                    <div>
+                                        <button class="btn btn-primary btn-block font-weight-bold py-3" type="submit" onclick="GetAllStations()">Book Now</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                          
+                    </div>
+                }
+            </div>
+        </div>
+          
+    </div>
+<!-- Reservation End -->
+@*<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        function GetAllStations() {
+            var orderdata = {
+                'OrderID': 2, 'ServiceID': 1, 'Coffee_ID': 1, 'SweetID': 1, 'TableNumber': $("#TableNumber").val(), 'Quantity': 1, 'Total_Price': $("#TotalPrice").val(), Coffee: (null), Service: (null), Sweet: (null)
+            };
+            $.ajax({
+                async: true,
+                method: 'POST',
+                dataType: 'JSON',
+                contentType: 'application/json; charset=utf-8',
+                data: orderdata,
+                url: 'https://localhost:44346/api/PostOrder',
+                success: function (data) {
+                    alert(data + "The order is done successfuly***");
+                },
+                error: function (data) {
+                    console.log("There is a Error!!!")
+                    alert(data);
+                }
+            });
+
+
+        };
+    </script>*@

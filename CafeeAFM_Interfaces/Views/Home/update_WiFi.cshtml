@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.Title = "update_WiFi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Page Header Start -->
+<div class="container-fluid page-header mb-5 position-relative overlay-bottom">
+    <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
+        <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Admin</h1>
+        <div class="d-inline-flex mb-lg-5">
+            <p class="m-0 text-white"><a class="text-white" href="">Home</a></p>
+            <p class="m-0 text-white px-2">/</p>
+            <p class="m-0 text-white">Admin</p>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+<!-- Menu Start -->
+<div class="container-fluid pt-5">
+    <div class="container">
+        <h1>AUpdate Wi-Fi information  :</h1>
+        <br>
+
+
+        <form>
+            <label>
+                Wi-Fi Perioud:
+            </label>
+            <select id="firstCoffeeRow">
+            </select>
+            <label> Wi-Fi Perioud: </label> <br>
+            <input type="text" id="Wifi_Period"> <br> <br>
+            <label>
+                Wi-Fi Price :
+            </label>
+            <input type="text" id="Wifi_Price"> <br> <br>
+            
+            <input type="button" value="Update " onclick="GetAllStations()">
+        </form>
+    </div>
+</div>
+<!-- Menu End -->
+<!-- JavaScript Libraries -->
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+    window.addEventListener('load', function () {
+        GetAllStationsload();
+        function GetAllStationsload() {
+            // var list = [];
+            $.ajax({
+                async: true,
+                method: 'GET',
+                dataType: 'JSON',
+                contentType: 'application/json; charset=utf-8',
+                url: 'https://localhost:44346/api/GetWiFi',
+                success: function (data) {
+                    $.each(data, function (index, value1) {
+
+                        $("#firstCoffeeRow").append('<option value="Course">' + value1['Wifi_Period'] + '</option>');
+                        console.log("Wifi_Period", value1['Wifi_Period']);
+                        //list.push(value1['Coffee_ID']);
+                    });
+                },
+
+                error: function () {
+                    console.log("There is a proplem not get the Lecture!!!")
+                }
+            });
+        };
+    });
+
+    function GetAllStations() {
+
+        var orderdata = {
+            'Wifi_Period': $("#Wifi_Period").val(), 'Wifi_Price': $("#Wifi_Price").val(),
+        };
+        $.ajax({
+            async: true,
+            method: 'PUT',
+            dataType: 'JSON',
+            contentType: 'application/json; charset=utf-8',
+            data: { 'selectedname': $("#firstCoffeeRow").val(), orderdata },
+            url: 'https://localhost:44346/api/PutWifi',
+            success: function (data) {
+                alert(data + "The order is done successfuly***");
+            },
+            error: function (data) {
+                console.log("There is a Error!!!")
+                alert(data);
+            }
+        });
+
+    };
+</script>
+
+
+
+
+
+
+

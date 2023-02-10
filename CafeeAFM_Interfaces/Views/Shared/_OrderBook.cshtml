@@ -1,0 +1,22 @@
+﻿@using CafeeAFM.Models;
+    @model List<Book_Infos>
+
+
+    @foreach (var item1 in Model)
+    {
+
+
+        <div class="row">
+            <div class="col-6 col-sm-7">
+                @*<h5 style="color:white"><i class="fa fa-check text-primary mr-3"></i>@item1.Bookname</h5>*@
+                @*@Html.LabelFor(model => model.Bookname, new { @class = "form-control bg-transparent border-primary p-4" })*@
+
+                @Html.TextBox("Bookname", value: item1.Bookname, htmlAttributes: new {@class="h5", @readonly = "readonly" })
+
+            </div>
+                <div class="col-6 col-sm-5">
+                    <input type="number" class="form-control bg-transparent border-primary p-4 " placeholder="Quantity" required="required" />
+                </div>
+                </div>
+                }
+                
